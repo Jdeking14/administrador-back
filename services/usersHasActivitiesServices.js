@@ -60,7 +60,7 @@ const addUsersToActivity = async (userIds, activityId) => {
 
         for (const user of users) {
             const htmlContent = await renderHtml(user.name, activity.name);
-            sendEmail(user.email, `ASIGNADO A GRUPO: ${activity.name}`, htmlContent);
+            //sendEmail(user.email, `ASIGNADO A GRUPO: ${activity.name}`, htmlContent);
         }
 
         return await UsersHasActivities.bulkCreate(userActivities);
@@ -126,7 +126,7 @@ const updateUsersInActivity = async (userIds, activityId) => {
 
             const userName = `${user.firstName} ${user.lastName}`;
             const htmlContent = await renderHtml(userName, activity.name);
-            sendEmail(user.email, `ASIGNADO A GRUPO: ${activity.name}`, htmlContent);
+            //sendEmail(user.email, `ASIGNADO A GRUPO: ${activity.name}`, htmlContent);
         }
         return await UsersHasActivities.bulkCreate(userActivities, { updateOnDuplicate: ['amount'] });
     } catch (error) {
@@ -175,7 +175,7 @@ const getAllUsersFromActivity = async (activityId) => {
 
             const userName = `${user.firstName} ${user.lastName}`;
             const htmlContent = await renderHtml(userName, activity.name);
-            sendEmail(user.email, `ASIGNADO A GRUPO: ${activity.name}`, htmlContent);
+            //sendEmail(user.email, `ASIGNADO A GRUPO: ${activity.name}`, htmlContent);
         }
 
         return userActivities;
@@ -223,7 +223,7 @@ const deleteUsersFromActivity = async (activityId) => {
 
             const userName = `${user.firstName} ${user.lastName}`;
             const htmlContent = await renderHtml(userName, activity.name);
-            sendEmail(user.email, `ASIGNADO A GRUPO: ${activity.name}`, htmlContent);
+            //sendEmail(user.email, `ASIGNADO A GRUPO: ${activity.name}`, htmlContent);
         }
 
 

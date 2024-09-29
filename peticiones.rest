@@ -55,6 +55,11 @@ Content-Type: application/json
   "password": "123456"
 }
 
+### Login que devuelve el jwt
+### Login
+POST http://localhost:3030/api/auth/1
+Content-Type: application/json
+
 ### Obtener usuarios con jwt
 GET http://localhost:3030/api/user/
 Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjo5LCJlbWFpbCI6Imp3dHRlc3QxQGdtYWlsLmNvbSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTcxNTUzODU0MCwiZXhwIjoxNzE1NTQyMTQwfQ.acg58ni5p1k1D-Q_7Lxt3dSH1Un23IiHQVWCqtA_BkM

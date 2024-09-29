@@ -82,7 +82,7 @@ const register_User_has_Group = async (userId, GroupId, percent) => {
     const groupName = hasgroup.name;
     const htmlContent = await renderHtml(email, { groupName, email });
     console.log("Sending email to:", email, "with content:", htmlContent); // Depuración
-    sendEmail(email, `Invitación a grupo ${hasgroup.name}`, htmlContent);
+    //sendEmail(email, `Invitación a grupo ${hasgroup.name}`, htmlContent);
 
     const userGroup = {
       idUser: userId,
