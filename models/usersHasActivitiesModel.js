@@ -10,7 +10,7 @@ const UsersHasActivities = sequelize.define('users_has_activities', {
         type: DataTypes.INTEGER,
         primaryKey: true
     },
-    amount: DataTypes.DECIMAL
+    seleccionado: DataTypes.BOOLEAN
 }, {  timestamps: false });
 
 module.exports = UsersHasActivities;

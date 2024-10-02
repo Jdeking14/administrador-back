@@ -185,54 +185,43 @@ const getAllUsersFromActivity = async (activityId) => {
     }
 };
 
-const deleteUsersFromActivity = async (activityId) => {
+const deleteUsersFromActivity = async (queryParams) => {
     try {
-        if (!activityId) {
+        if (!queryParams) {
             throw new Error('Entrada inválida');
         }
 
-        const activity = await Activity.findByPk(activityId);
-        if (!activity) {
-            throw new Error('Actividad no encontrada');
-        }
+        const { idUser, idActivitie, seleccionado } = queryParams;
 
+
+        // Eliminar usuarios de la actividad basada en los tres campos: idUser, idActivitie y seleccionado
         await UsersHasActivities.destroy({
             where: {
-                idActivitie: activityId
+                idUser: idUser,
+                idActivitie: idActivitie,
+                seleccionado: 1
             }
         });
-
-        const users = await User.findAll({
-            where: {
-                id: userIds
-            },
-            attributes: ['firstName', 'lastName', 'email'] // Selecciona solo los campos necesarios
-        });
-
-        for (const user of users) {
-
-            const renderHtml = async (userName, activityName) => {
-                try {
-                    let templatePath = path.join(__dirname, '../html', 'delete.ejs');
-                    return await ejs.renderFile(templatePath, { userName, activityName });
-                } catch (error) {
-                    console.error('Error al renderizar el HTML:', error);
-                    return '<p>Error loading HTML content</p>';
-                }
-            };
-
-            const userName = `${user.firstName} ${user.lastName}`;
-            const htmlContent = await renderHtml(userName, activity.name);
-            //sendEmail(user.email, `ASIGNADO A GRUPO: ${activity.name}`, htmlContent);
-        }
-
-
-
-        return { message: 'Usuarios eliminados de la actividad con éxito' };
     } catch (error) {
         console.error(error);
         throw error;
     }
 };
 
-module.exports = { addUsersToActivity, updateUsersInActivity, getAllUsersFromActivity, deleteUsersFromActivity };
+const registerUserActivity = async ({ idUser, idActivitie, seleccionado }) => {
+    try {
+        
+        const userActivities = [{ idUser, idActivitie, seleccionado }];
+
+        return await UsersHasActivities.bulkCreate(userActivities);
+    } catch (error) {
+        console.error(error);
+        throw error;
+    }
+  };
+
+module.exports = { addUsersToActivity, 
+                   updateUsersInActivity, 
+                   getAllUsersFromActivity, 
+                   deleteUsersFromActivity,
+                   registerUserActivity };

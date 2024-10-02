@@ -3,6 +3,7 @@ const {
   updateUsersInActivity,
   getAllUsersFromActivity,
   deleteUsersFromActivity,
+  registerUserActivity
 } = require("@services/usersHasActivitiesServices");
 
 const postUsersInActivity = async (req, res) => {
@@ -39,7 +40,7 @@ const getUsersFromActivity = async (req, res) => {
 
 const removeUsersFromActivity = async (req, res) => {
   try {
-    const result = await deleteUsersFromActivity(req.params.id);
+    const result = await deleteUsersFromActivity(req.query);
     res.status(200).json(result);
   } catch (err) {
     console.error(err);
@@ -47,9 +48,20 @@ const removeUsersFromActivity = async (req, res) => {
   }
 };
 
+const createUserActivity = async (req, res) => {
+  try {
+      const result = await registerUserActivity(req.body);
+      res.status(202).status(201).json(result);
+  } catch (err) {
+      console.log(err);
+      res.status(500).json(err);
+  }
+}
+
 module.exports = {
   postUsersInActivity,
   patchUsersInActivity,
   getUsersFromActivity,
   removeUsersFromActivity,
+  createUserActivity
 };

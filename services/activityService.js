@@ -121,6 +121,8 @@ const registerActivity = async ({ idGroup, name, amount, type, date, idPayer }) 
   }
 };
 
+
+
 const deleteActivityById = async (id) => {
   try {
     const activity = await Activity.findByPk(id);
@@ -142,4 +144,5 @@ module.exports = {
   editActivityPatch,
   registerActivity,
   deleteActivityById,
+  
 };
